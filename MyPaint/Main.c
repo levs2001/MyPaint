@@ -1,5 +1,6 @@
 #include <Windows.h>
-
+#include "WinFunc.h"
+#include "Drawing.h"
 
 ///////////////////////////////////// глобальные переменные
 char szClassName[] = "Window1";
@@ -12,7 +13,7 @@ ATOM registerMyClass(HINSTANCE hInstance);
 int createMyWindow(HINSTANCE hInstance, int nCmdShow);
 //////////////////////////////////////
 
-
+MENU* pMenu = NULL;
 
 
 
@@ -20,7 +21,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 {
 	MSG msg;
 
-	
+	pMenu = MenuInit();
 	createMyWindow(hInstance, nCmdShow);
 
 
@@ -48,6 +49,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 		break;
 	}
+	case WM_CREATE:
+	{
+		
+	}
 	case WM_KEYDOWN:
 	{
 		switch (wParam)
@@ -58,12 +63,35 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	}
+	case WM_LBUTTONDOWN:
+	{
+
+		pMenu->click.x = LOWORD(lParam);//координаты с которыми нажата мышь - аргументы WndProc
+		pMenu->click.y = HIWORD(lParam);
+		pMenu->currentBut = CheckClick(pMenu);
+		InvalidateRect(hWnd, NULL, 0);
+
+		break;
+	}
+	case WM_MOUSEMOVE:
+	{
+
+		if (wParam & MK_LBUTTON)
+		{
+			pMenu->click.x = LOWORD(lParam);//координаты с которыми нажата мышь - аргументы WndProc
+			pMenu->click.y = HIWORD(lParam);
+			InvalidateRect(hWnd, NULL, 0);
+		}
+
+	}
 	case WM_PAINT:
 	{
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
 		
-
+		if(pMenu->menuDraw == true)
+			DrawMyMenu(hdc, pMenu);
+		CanvasDraw(hdc, pMenu);
 		EndPaint(hWnd, &ps);
 	}
 	}
@@ -74,7 +102,7 @@ int createMyWindow(HINSTANCE hInstance, int nCmdShow)
 {
 	registerMyClass(hInstance);
 
-	hWnd = CreateWindow(szClassName, L"My paint", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 616, 639, NULL, NULL, hInstance, NULL);
+	hWnd = CreateWindow(szClassName, L"My paint", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1200, 900, NULL, NULL, hInstance, NULL);
 
 	if (!hWnd) { return 0; }
 	ShowWindow(hWnd, nCmdShow);
