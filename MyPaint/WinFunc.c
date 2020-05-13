@@ -20,14 +20,14 @@ MENU* MenuInit(void) {
 	ButInit(&(paintMenu->NEW), 0, 0, 75, 30, "new", 1, RGB(255,255,255));
 	ButInit(&(paintMenu->OPEN), 75, 0, 75, 30, "open", 2, RGB(255, 255, 255));
 	ButInit(&(paintMenu->SAVE), 150, 0, 75, 30, "save", 3, RGB(255, 255, 255));
-	ButInit(&(paintMenu->PENCIL1), 500, 0, 10, 10, "", 4, RGB(255, 255, 255));
-	ButInit(&(paintMenu->PENCIL2), 510, 0, 20, 20, "", 5, RGB(255, 255, 255));
-	ButInit(&(paintMenu->PENCIL3), 530, 0, 30, 30, "", 6, RGB(255, 255, 255));
-	ButInit(&(paintMenu->COLRED), 400, 0, 20, 20, "", 7, RGB(255, 0, 0));
-	ButInit(&(paintMenu->COLGREEN), 420, 0, 20, 20, "", 8, RGB(0, 255, 0));
-	ButInit(&(paintMenu->COLBLUE), 440, 0, 20, 20, "", 9, RGB(0, 0, 255));
-	ButInit(&(paintMenu->COLBIR), 460, 0, 20, 20, "", 10, RGB(0, 255, 255));
-	ButInit(&(paintMenu->ERASER), 580, 0, 80, 30, "", 11, RGB(215, 215, 215));
+	ButInit(&(paintMenu->PENCIL1), 900, 0, 10, 10, "", 4, RGB(255, 255, 255));
+	ButInit(&(paintMenu->PENCIL2), 910, 0, 20, 20, "", 5, RGB(255, 255, 255));
+	ButInit(&(paintMenu->PENCIL3), 930, 0, 30, 30, "", 6, RGB(255, 255, 255));
+	ButInit(&(paintMenu->COLRED), 800, 0, 20, 20, "", 7, RGB(255, 0, 0));
+	ButInit(&(paintMenu->COLGREEN), 820, 0, 20, 20, "", 8, RGB(0, 255, 0));
+	ButInit(&(paintMenu->COLBLUE), 840, 0, 20, 20, "", 9, RGB(0, 0, 255));
+	ButInit(&(paintMenu->COLBIR), 860, 0, 20, 20, "", 10, RGB(0, 255, 255));
+	ButInit(&(paintMenu->ERASER), 980, 0, 80, 30, "", 11, RGB(215, 215, 215));
 
 	return paintMenu;
 }

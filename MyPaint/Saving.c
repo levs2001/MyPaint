@@ -17,14 +17,22 @@
 #define MYGRAY 7
 
 
-void SavePainting(HDC hdc, int sizeX, int sizeY) {
+int SavePainting(HDC hdc, char* fileName, int sizeX, int sizeY) {
+	FILE* file = fopen(fileName, "w");
 
+	if (file == NULL)
+		return -1;
+
+	WriteToFile(hdc, file, sizeX, sizeY);
+
+	fclose(file);
+	return 0;
 }
 
 void WriteToFile(HDC hdc, FILE* file, int sizeX, int sizeY) {
 	COLORREF pColor;
 
-	for (int y = 1; y <= sizeY; y++) {
+	for (int y = 31; y <= sizeY; y++) {
 		for (int x = 1; x <= sizeX; x++) {
 			pColor = GetPixel(hdc, x, y);
 			fprintf(file, "%d", MyNumColor(pColor));
@@ -34,6 +42,54 @@ void WriteToFile(HDC hdc, FILE* file, int sizeX, int sizeY) {
 
 }
 
+int OpenPainting(HDC hdc, char* fileName, int sizeX, int sizeY) {
+	FILE* file = fopen(fileName, "r+");
+
+	if (file == NULL)
+		return -1;
+
+	PaintFile(hdc, file, sizeX, sizeY);
+
+	fclose(file);
+	return 0;
+}
+
+
+void PaintFile(HDC hdc, FILE* file, int sizeX, int sizeY) {
+	COLORREF pColor;
+	char pixNum = 1;
+	int x = 1;
+	for (int y = 31; y <= 900; y++) {
+		do {
+			fscanf(file, "%c", &pixNum);
+			if(pixNum != '\n')
+				SetPixel(hdc, x, y, GetColor(pixNum));
+			x++;
+		} while (pixNum != '\n');
+		x = 0;
+	}
+}
+
+COLORREF GetColor(char pixNum) {
+	
+	if (pixNum == '1')
+		return RGB(255, 255, 255);
+	if (pixNum == '2')
+		return RGB(0, 0, 0);
+	if (pixNum == '3')
+		return RGB(255, 0, 0);
+	if (pixNum == '4')
+		return RGB(0, 255, 0);
+	if (pixNum == '5')
+		return RGB(0, 0, 255);
+	if (pixNum == '6')
+		return RGB(0, 255, 255);
+	if (pixNum == '7')
+		return RGB(215, 215, 215);
+
+	return RGB(255, 255, 255);
+
+}
 
 int MyNumColor(COLORREF pColor) {
 	int R = GetRValue(pColor), G = GetGValue(pColor), B = GetBValue(pColor);

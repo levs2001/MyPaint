@@ -1,10 +1,12 @@
 #include <Windows.h>
 #include "WinFunc.h"
 #include "Drawing.h"
-
+#include "Saving.h"
 ///////////////////////////////////// глобальные переменные
 char szClassName[] = "Window1";
 HWND hWnd;
+HWND textBox1;
+char fileName[300] = { 0 };
 ///////////////////////////////////// прототипы функций
 LRESULT CALLBACK WndProc(HWND, UINT, UINT, LONG);
 
@@ -24,7 +26,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	pMenu = MenuInit();
 	createMyWindow(hInstance, nCmdShow);
 	
-
 	while (GetMessage(&msg, 0, 0, 0))
 	{
 		TranslateMessage(&msg);
@@ -39,10 +40,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	static HWND hEdit;
-	HINSTANCE hInst;
+	
+
 	switch (msg)
 	{
+	case WM_CREATE: {
+		textBox1 = CreateWindow("edit", "", WS_CHILD | WS_VISIBLE | WS_BORDER, 240, 5, 520, 20, hWnd, NULL, NULL, NULL);
+		break;
+	}
 
 	case WM_DESTROY:
 	{
@@ -66,6 +71,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		pMenu->click.x = LOWORD(lParam);//координаты с которыми нажата мышь - аргументы WndProc
 		pMenu->click.y = HIWORD(lParam);
 		pMenu->currentBut = CheckClick(pMenu);
+		/*if (pMenu->currentBut == pMenu->SAVE.number) {
+			GetWindowText(textBox1, fileName, 300);
+		}*/
 		InvalidateRect(hWnd, NULL, 0);
 
 		break;
@@ -88,6 +96,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		
 		if(pMenu->menuDraw == true)
 			DrawMyMenu(hdc, pMenu);
+		if (pMenu->currentBut == pMenu->SAVE.number) {
+			GetWindowText(textBox1, fileName, 300);
+
+			if(SavePainting(hdc, fileName, 1200, 900)!=-1)
+				SetWindowText(textBox1, "Saved.");
+			else
+				SetWindowText(textBox1, "Not Correct name.");
+
+			pMenu->currentBut = 0;
+		}
+		if (pMenu->currentBut == pMenu->OPEN.number) {
+			GetWindowText(textBox1, fileName, 300);
+
+			if (OpenPainting(hdc, fileName, 1200, 900) != -1)
+				SetWindowText(textBox1, "Opened.");
+			else
+				SetWindowText(textBox1, "Not Correct name.");
+
+			pMenu->currentBut = 0;
+		}
 		CanvasDraw(hdc, pMenu);
 		EndPaint(hWnd, &ps);
 	}
@@ -99,8 +127,8 @@ int createMyWindow(HINSTANCE hInstance, int nCmdShow)
 {
 	registerMyClass(hInstance);
 
-	hWnd = CreateWindow(szClassName, L"My paint", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1200, 900, NULL, NULL, hInstance, NULL);
-
+	hWnd = CreateWindow(szClassName, "My paint", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1200, 900, NULL, NULL, hInstance, NULL);
+	
 	if (!hWnd) { return 0; }
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
