@@ -1,5 +1,5 @@
 #pragma once
-
+//Change to check
 #include "WinFunc.h"
 #include "string.h"
 #include <stdlib.h>

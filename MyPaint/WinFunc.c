@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-
+//Change to check
 #include "WinFunc.h"
 #include "string.h"
 #include <stdlib.h>

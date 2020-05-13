@@ -3,6 +3,7 @@
 #include "Drawing.h"
 #include "Saving.h"
 ///////////////////////////////////// глобальные переменные
+//Change to check
 char szClassName[] = "Window1";
 HWND hWnd;
 HWND textBox1;

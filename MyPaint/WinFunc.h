@@ -5,7 +5,7 @@ typedef struct {
 	int x;
 	int y;
 }MYCOORD;
-
+//Change to check
 typedef struct {
 	MYCOORD size;
 	char name[15];

@@ -1,7 +1,7 @@
 #include "Drawing.h"
 #include "WinFunc.h"
 #include <Windows.h>
-
+//Change to check
 void DrawMyMenu(HDC hdc, MENU* paintMenu) {
 	
 	DrawMyButton(hdc, &(paintMenu->NEW));

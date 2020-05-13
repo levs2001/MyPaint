@@ -1,7 +1,7 @@
 #pragma once
 #include "WinFunc.h"
 #include <Windows.h>
-
+//Change to check
 
 void DrawMyMenu(HDC hdc, MENU* paintMenu);
 void DrawMyButton(HDC hdc, BUTTON* button);
