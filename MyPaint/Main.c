@@ -23,7 +23,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	pMenu = MenuInit();
 	createMyWindow(hInstance, nCmdShow);
-
+	
 
 	while (GetMessage(&msg, 0, 0, 0))
 	{
@@ -39,7 +39,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	
+	static HWND hEdit;
+	HINSTANCE hInst;
 	switch (msg)
 	{
 
@@ -48,10 +49,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 
 		break;
-	}
-	case WM_CREATE:
-	{
-		
 	}
 	case WM_KEYDOWN:
 	{

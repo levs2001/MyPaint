@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdbool.h> 
 #include <Windows.h> 
+#include <stdio.h>
+
 
 
 MENU* MenuInit(void) {
@@ -12,7 +14,7 @@ MENU* MenuInit(void) {
 	paintMenu = malloc(sizeof(MENU));
 
 	paintMenu->menuDraw = true;
-
+	paintMenu->currentBut = 0;
 	paintMenu->button_count = 6;
 	
 	ButInit(&(paintMenu->NEW), 0, 0, 75, 30, "new", 1, RGB(255,255,255));
@@ -41,6 +43,7 @@ void ButInit(BUTTON* button, int locX, int locY, int sizeX, int sizeY, char* nam
 	button->mycolor = _mycolor;
 
 }
+
 
 int CheckClick(MENU* paintMenu) {
 	

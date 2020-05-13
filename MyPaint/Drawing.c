@@ -16,14 +16,17 @@ void DrawMyMenu(HDC hdc, MENU* paintMenu) {
 	DrawMyButton(hdc, &(paintMenu->COLBIR));
 	DrawMyButton(hdc, &(paintMenu->ERASER));
 	paintMenu->menuDraw = false;
+	CleanCanvas(hdc, 1200, 900);
 	/////
 	
 }
 
 void CanvasDraw(HDC hdc, MENU* paintMenu) {
 	if (paintMenu->currentBut != 0) {
-		if (paintMenu->currentBut == paintMenu->NEW.number)
-			TextOutA(hdc, 300, 300, paintMenu->NEW.name, strlen(paintMenu->NEW.name));
+		if (paintMenu->currentBut == paintMenu->NEW.number) {
+			CleanCanvas(hdc, 1200, 900);
+			paintMenu->currentBut = 0;
+		}
 		if (paintMenu->currentBut == paintMenu->OPEN.number)
 			TextOutA(hdc, 300, 300, paintMenu->OPEN.name, strlen(paintMenu->OPEN.name));
 		if (paintMenu->currentBut == paintMenu->SAVE.number)
@@ -37,6 +40,18 @@ void CanvasDraw(HDC hdc, MENU* paintMenu) {
 	}
 }
 
+
+void CleanCanvas(HDC hdc, int sizeX, int sizeY) {
+	
+	/*for (int x = 0; x < sizeX; x++) {
+		for (int y = 30; y < sizeY; y++) {
+			SetPixel(hdc, x, y, RGB(255, 255, 255));
+		}
+	}*/
+	HBRUSH myBrush = CreateSolidBrush(RGB(255,255,255));
+	SelectObject(hdc, myBrush);
+	Rectangle(hdc, 0, 30, sizeX, 30+sizeY);
+}
 void DrawMyButton(HDC hdc, BUTTON* button) {
 	HBRUSH myBrush = CreateSolidBrush(button->mycolor);
 	SelectObject(hdc, myBrush);

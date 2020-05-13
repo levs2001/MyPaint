@@ -141,10 +141,12 @@
   <ItemGroup>
     <ClCompile Include="Drawing.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="Saving.c" />
     <ClCompile Include="WinFunc.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawing.h" />
+    <ClInclude Include="Saving.h" />
     <ClInclude Include="WinFunc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

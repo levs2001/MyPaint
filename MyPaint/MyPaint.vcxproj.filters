@@ -24,12 +24,18 @@
     <ClCompile Include="Main.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Saving.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinFunc.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Drawing.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Saving.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
