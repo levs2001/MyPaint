@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-
+//Change to check
 #include "WinFunc.h"
 #include "string.h"
 #include <stdlib.h>
@@ -62,7 +62,7 @@ void PaintFile(HDC hdc, FILE* file, int sizeX, int sizeY) {
 	for (int y = 31; y <= 900; y++) {
 		do {
 			fscanf(file, "%c", &pixNum);
-			if(pixNum != '\n')
+			if (pixNum != '\n')
 				SetPixel(hdc, x, y, GetColor(pixNum));
 			x++;
 		} while (pixNum != '\n');
@@ -71,7 +71,7 @@ void PaintFile(HDC hdc, FILE* file, int sizeX, int sizeY) {
 }
 
 COLORREF GetColor(char pixNum) {
-	
+
 	if (pixNum == '1')
 		return RGB(255, 255, 255);
 	if (pixNum == '2')
@@ -111,4 +111,3 @@ int MyNumColor(COLORREF pColor) {
 
 	return MYWHITE;
 }
-

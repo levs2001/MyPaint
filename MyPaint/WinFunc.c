@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-
+//Change to check
 #include "WinFunc.h"
 #include "string.h"
 #include <stdlib.h>
@@ -16,8 +16,8 @@ MENU* MenuInit(void) {
 	paintMenu->menuDraw = true;
 	paintMenu->currentBut = 0;
 	paintMenu->button_count = 6;
-	
-	ButInit(&(paintMenu->NEW), 0, 0, 75, 30, "new", 1, RGB(255,255,255));
+
+	ButInit(&(paintMenu->NEW), 0, 0, 75, 30, "new", 1, RGB(255, 255, 255));
 	ButInit(&(paintMenu->OPEN), 75, 0, 75, 30, "open", 2, RGB(255, 255, 255));
 	ButInit(&(paintMenu->SAVE), 150, 0, 75, 30, "save", 3, RGB(255, 255, 255));
 	ButInit(&(paintMenu->PENCIL1), 900, 0, 10, 10, "", 4, RGB(255, 255, 255));
@@ -33,7 +33,7 @@ MENU* MenuInit(void) {
 }
 
 void ButInit(BUTTON* button, int locX, int locY, int sizeX, int sizeY, char* name, int num, COLORREF _mycolor) {
-	
+
 	button->location.x = locX;
 	button->location.y = locY;
 	button->size.x = sizeX;
@@ -46,22 +46,22 @@ void ButInit(BUTTON* button, int locX, int locY, int sizeX, int sizeY, char* nam
 
 
 int CheckClick(MENU* paintMenu) {
-	
+
 	if (ButAim(&(paintMenu->NEW), paintMenu->click) == true)
 		return paintMenu->NEW.number;
-	
+
 	if (ButAim(&(paintMenu->OPEN), paintMenu->click) == true)
 		return paintMenu->OPEN.number;
-	
+
 	if (ButAim(&(paintMenu->SAVE), paintMenu->click) == true)
 		return paintMenu->SAVE.number;
 
 	if (ButAim(&(paintMenu->PENCIL1), paintMenu->click) == true)
 		return paintMenu->PENCIL1.number;
-	
+
 	if (ButAim(&(paintMenu->PENCIL2), paintMenu->click) == true)
 		return paintMenu->PENCIL2.number;
-	
+
 	if (ButAim(&(paintMenu->PENCIL3), paintMenu->click) == true)
 		return paintMenu->PENCIL3.number;
 
@@ -76,9 +76,9 @@ int CheckClick(MENU* paintMenu) {
 
 	if (ButAim(&(paintMenu->COLBIR), paintMenu->click) == true)
 		paintMenu->currentCol = paintMenu->COLBIR.mycolor;
-	
+
 	if (ButAim(&(paintMenu->ERASER), paintMenu->click) == true)
-		paintMenu->currentCol = RGB(255,255,255);
+		paintMenu->currentCol = RGB(255, 255, 255);
 
 	if (paintMenu->currentBut != paintMenu->PENCIL1.number && paintMenu->currentBut != paintMenu->PENCIL2.number
 		&& paintMenu->currentBut != paintMenu->PENCIL3.number)

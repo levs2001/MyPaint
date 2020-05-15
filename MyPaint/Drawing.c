@@ -1,9 +1,9 @@
 #include "Drawing.h"
 #include "WinFunc.h"
 #include <Windows.h>
-
+//Change to check
 void DrawMyMenu(HDC hdc, MENU* paintMenu) {
-	
+
 	DrawMyButton(hdc, &(paintMenu->NEW));
 	DrawMyButton(hdc, &(paintMenu->OPEN));
 	DrawMyButton(hdc, &(paintMenu->SAVE));
@@ -18,7 +18,7 @@ void DrawMyMenu(HDC hdc, MENU* paintMenu) {
 	paintMenu->menuDraw = false;
 	CleanCanvas(hdc, 1200, 900);
 	/////
-	
+
 }
 
 void CanvasDraw(HDC hdc, MENU* paintMenu) {
@@ -42,16 +42,13 @@ void CanvasDraw(HDC hdc, MENU* paintMenu) {
 
 
 void CleanCanvas(HDC hdc, int sizeX, int sizeY) {
-	
-	/*for (int x = 0; x < sizeX; x++) {
-		for (int y = 30; y < sizeY; y++) {
-			SetPixel(hdc, x, y, RGB(255, 255, 255));
-		}
-	}*/
-	HBRUSH myBrush = CreateSolidBrush(RGB(255,255,255));
+
+	HBRUSH myBrush = CreateSolidBrush(RGB(255, 255, 255));
 	SelectObject(hdc, myBrush);
-	Rectangle(hdc, 0, 30, sizeX, 30+sizeY);
+	Rectangle(hdc, 0, 30, sizeX, 30 + sizeY);
 }
+
+
 void DrawMyButton(HDC hdc, BUTTON* button) {
 	HBRUSH myBrush = CreateSolidBrush(button->mycolor);
 	SelectObject(hdc, myBrush);
@@ -59,16 +56,13 @@ void DrawMyButton(HDC hdc, BUTTON* button) {
 		RoundRect(hdc, button->location.x, button->location.y, button->location.x + button->size.x, button->location.y + button->size.y, button->size.x / 2, button->size.y / 2);
 	else
 		Rectangle(hdc, button->location.x, button->location.y, button->location.x + button->size.x, button->location.y + button->size.y);
-	TextOutA(hdc, button->location.x + button->size.x / 3, button->location.y + button->size.y/3, button->name, strlen(button->name));
+	TextOutA(hdc, button->location.x + button->size.x / 3, button->location.y + button->size.y / 3, button->name, strlen(button->name));
 }
 
-void DrawDot(HDC hdc, MYCOORD coord, int size, COLORREF color) {
-	
-	/*HBRUSH myBrush = CreateSolidBrush(color);
-	SelectObject(hdc, myBrush);
 
-	Rectangle(hdc, coord.x, coord.y, coord.x + size, coord.y + size);*/
-	if (coord.y - size/2 > 30) {
+void DrawDot(HDC hdc, MYCOORD coord, int size, COLORREF color) {
+
+	if (coord.y - size / 2 > 30) {
 		for (int x = coord.x - size / 2; x < coord.x + size / 2; x++) {
 			for (int y = coord.y - size / 2; y < coord.y + size / 2; y++) {
 				SetPixel(hdc, x, y, color);

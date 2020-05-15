@@ -3,6 +3,7 @@
 #include "Drawing.h"
 #include "Saving.h"
 ///////////////////////////////////// глобальные переменные
+//Change to check
 char szClassName[] = "Window1";
 HWND hWnd;
 HWND textBox1;
@@ -25,14 +26,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	pMenu = MenuInit();
 	createMyWindow(hInstance, nCmdShow);
-	
+
 	while (GetMessage(&msg, 0, 0, 0))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
 
-	
+
 	return msg.wParam;
 
 
@@ -40,7 +41,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	
+
 
 	switch (msg)
 	{
@@ -59,7 +60,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		switch (wParam)
 		{
-		
+
 		default:
 			break;
 		}
@@ -93,13 +94,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
-		
-		if(pMenu->menuDraw == true)
+
+		if (pMenu->menuDraw == true)
 			DrawMyMenu(hdc, pMenu);
 		if (pMenu->currentBut == pMenu->SAVE.number) {
 			GetWindowText(textBox1, fileName, 300);
 
-			if(SavePainting(hdc, fileName, 1200, 900)!=-1)
+			if (SavePainting(hdc, fileName, 1200, 900) != -1)
 				SetWindowText(textBox1, "Saved.");
 			else
 				SetWindowText(textBox1, "Not Correct name.");
@@ -128,7 +129,7 @@ int createMyWindow(HINSTANCE hInstance, int nCmdShow)
 	registerMyClass(hInstance);
 
 	hWnd = CreateWindow(szClassName, "My paint", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1200, 900, NULL, NULL, hInstance, NULL);
-	
+
 	if (!hWnd) { return 0; }
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
